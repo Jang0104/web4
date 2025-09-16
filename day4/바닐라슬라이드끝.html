@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>바닐라 슬라이드 최종</title>
     <style>
-        *{
+        * {
             padding: 0;
             margin: 0;
         }
@@ -22,7 +23,7 @@
             height: 500px;
         }
 
-        .slide > li {
+        .slide>li {
             width: 1000px;
             height: 500px;
             list-style: none;
@@ -41,7 +42,7 @@
             align-items: center;
         }
 
-        .slide_btns > button {
+        .slide_btns>button {
             width: 100px;
             height: 50px;
             font-size: 30px;
@@ -68,6 +69,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="slide_container">
         <ul class="slide">
@@ -112,7 +114,7 @@
         // 복제한 4번 슬라이드를 슬라이드의 맨 앞에 추가
         slide.appendChild(first);
         //appendChild : 부모요소에 자식요소를 맨 마지막에 추가
-        slide.insertBefore(last,slide.firstElementChild);
+        slide.insertBefore(last, slide.firstElementChild);
         // insertBefore : 특정 요소 앞에 새 요소를 추가
 
 
@@ -122,53 +124,54 @@
         //-----------------------------------------------------------------------------------
         // 처음 브라우저 열었을 때 보이는 인덱스 설정
         let index = 1;
-        slide.style.transform = `translateX(-${index*sliderWidth}px)`;
+        slide.style.transform = `translateX(-${index * sliderWidth}px)`;
 
         //-----------------------------------------------------------------------------------
         // 움직이는 기능
-        function moveSlide(time){
+        function moveSlide(time) {
             slide.style.transition = time + 'ms'; // 1000 -> 1000ms 1초
-            slide.style.transform = `translateX(-${index*sliderWidth}px)`;
+            slide.style.transform = `translateX(-${index * sliderWidth}px)`;
         }
 
         //------------------------------------------------------------------------------------
         // 버튼을 눌렀을 때 설정
-        function prev(){
-            if(moveCheck){// 위에서 moveCheck에 true를 넣어놓았음
+        function prev() {
+            if (moveCheck) {// 위에서 moveCheck에 true를 넣어놓았음
                 moveCheck = false;//if문은 조건이 true일때만 작동하기 때문에 이전 버튼을 클릭하지 못하도록 (중복으로 prev가 계속 클릭되는 현상을 막기 위해)if문이 실행되지 않게 false를 대입함
                 index--; //이전 버튼을 눌렀을 때 index가 3이라면 2로 바뀌어야함
-                setTimeout(()=>{
-                    if(index === 0){ // 만약 인덱스가 맨 앞에 있는 복제한 4가 보이고 있다면  
-                        index = slide.childElementCount-2; // index에 슬라이드의 자식의 총 개수(6)에서 -2를 뺀 4라는 인덱스가 들어가게 만들어줌
+                setTimeout(() => {
+                    if (index === 0) { // 만약 인덱스가 맨 앞에 있는 복제한 4가 보이고 있다면  
+                        index = slide.childElementCount - 2; // index에 슬라이드의 자식의 총 개수(6)에서 -2를 뺀 4라는 인덱스가 들어가게 만들어줌
                         moveSlide(0);//맨 앞에 있는 index(0)에서 4번 인덱스로 이동해야하는데 이동하는 게 보이면 안 되니 시간을 0 넣어줌  
                     }
                     moveCheck = true;
-                },1000)// 1초동안 moveCheck를 false로 유지하고 싶음
+                }, 1000)// 1초동안 moveCheck를 false로 유지하고 싶음
                 moveSlide(1000);
             }
         }
-        
-        function next(){
-            if(moveCheck){// 위에서 moveCheck에 true를 넣어놓았음
+
+        function next() {
+            if (moveCheck) {// 위에서 moveCheck에 true를 넣어놓았음
                 moveCheck = false;//if문은 조건이 true일때만 작동하기 때문에 이전 버튼을 클릭하지 못하도록 (중복으로 next가 계속 클릭되는 현상을 막기 위해)if문이 실행되지 않게 false를 대입함
                 index++; //다음 버튼을 눌렀을 때 index가 2이라면 3로 바뀌어야함
-                setTimeout(()=>{
-                    if(index === slide.childElementCount-1){ // 슬라이드의 개수가 늘고 줄어도 항상 마지막 인덱스를 가리킬 수 있도록 최종 개수(6) 에서 -1 을 하여 5를 넣어줌  
+                setTimeout(() => {
+                    if (index === slide.childElementCount - 1) { // 슬라이드의 개수가 늘고 줄어도 항상 마지막 인덱스를 가리킬 수 있도록 최종 개수(6) 에서 -1 을 하여 5를 넣어줌  
                         index = 1;// 마지막에서 다음을 눌렀다면 1번으로 이동하면 됨
                         moveSlide(0);//이동하는 것이 보이지 않도록 시간 0을 넣어줌
                     }
                     moveCheck = true;
-                },1000)// 1초동안 moveCheck를 false로 유지하고 싶음
+                }, 1000)// 1초동안 moveCheck를 false로 유지하고 싶음
                 moveSlide(1000);
             }
         }
 
-        buttons.children[0].addEventListener('click',prev);
-        buttons.children[2].addEventListener('click',next);
+        buttons.children[0].addEventListener('click', prev);
+        buttons.children[2].addEventListener('click', next);
 
-        setInterval(()=>{
+        setInterval(() => {
             next();
-        },5000)
+        }, 5000)
     </script>
 </body>
+
 </html>

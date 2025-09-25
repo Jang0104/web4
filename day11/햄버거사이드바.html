@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>햄버거 사이드바</title>
     <style>
         body {
             margin: 0;
@@ -13,11 +13,11 @@
 
         .ham_container {
             position: fixed;
-            background: #000;
             right: 24px;
             top: 24px;
-            z-index: 999;
+            z-index: 9999;
             padding: 16px 0;
+
         }
 
         .hamburger {
@@ -51,7 +51,7 @@
             top: 0;
             width: 300px;
             height: 100%;
-            background-color: #f2ffb6;
+            background-color: #ffaeae;
             padding: 0;
             margin: 0;
             right: -300px;
@@ -64,10 +64,9 @@
         }
 
         .menu>li>a {
-            color: antiquewhite;
+            color: #ff7171;
             font-size: 20px;
             text-decoration: none;
-
         }
 
         .menu.active {
@@ -80,13 +79,13 @@
 
         .hamburger.active::after {
             transform: rotate(45deg);
-            background-color: antiquewhite;
+            background-color: #ff7171;
             top: 0;
         }
 
         .hamburger.active::before {
             transform: rotate(-45deg);
-            background-color: antiquewhite;
+            background-color: #ff7171;
             top: 0;
         }
     </style>
@@ -103,7 +102,7 @@
         <li><a href="#">Contact</a></li>
     </ul>
     <script>
-        // 햄버거, 햄컨테이너, 메뉴 가져오기
+        // 햄버거, 햄컨테이너,메뉴 가져오기
         // 쿼리셀렉터 사용
 
         /*
@@ -113,12 +112,12 @@
         */
 
         const hamburger = document.querySelector(".hamburger");
-        const ham_container = document.querySelector(".ham_container");
+        const hamContainer = document.querySelector(".ham_container");
         const menu = document.querySelector(".menu");
 
-        // hamContainer.addEventListner("click", () => {
+        // hamContainer.addEventListener("click",()=>{
         //     hamburger.classList.toggle("active");
-        //     meny.classList.toggle("active");
+        //     menu.classList.toggle("active");
         //     //toggle 해당 클래스를 이미 햄버거가 가지고 있다면 제거, 붙어있지 않다고 인식되면 붙이기
         // });
 
@@ -126,13 +125,14 @@
         hamContainer.addEventListener("click", () => {
             if (isMenuOpen) {
                 hamburger.classList.add("active");
-                menu.classList.add("acitve");
-            }else{
+                menu.classList.add("active");
+            } else {
                 hamburger.classList.remove("active");
                 menu.classList.remove("active");
             }
             isMenuOpen = !isMenuOpen;
         });
+
     </script>
 </body>
 

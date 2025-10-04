@@ -15,6 +15,10 @@
             display: flex;
             background-color: rgb(255, 199, 44);
             height: 100vh;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            color: #fff;
         }
 
         .left>p {
@@ -70,7 +74,7 @@
     <section class="map_section">
         <div class="left">
             <p>맥도날드</p>
-            <h1>MAC DONALD</h1>
+            <h1>McDonald's</h1>
 
             <iframe class="map"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2659.719548361449!2d126.90784200947473!3d37.55606718397214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9927a2adc71d%3A0x7f499b8a288b842d!2z66el64-E64Kg65OcIOunneybkOygkA!5e0!3m2!1sko!2skr!4v1758769671483!5m2!1sko!2skr"
@@ -81,21 +85,63 @@
 
         <div class="place_search">
             <h2>지점 찾기</h2>
-            <div class="input_box" id="input_text" class="input" aria-placeholder="지역을 입력하세요">
+            <div class="input_box">
+                <input type="text" id="input_text" class="input" placeholder="지역을 입력하세요">
                 <button class="search_icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
                         <path
                             d="M21.0002 21L16.6572 16.657M16.6572 16.657C17.4001 15.9141 17.9894 15.0321 18.3914 14.0615C18.7935 13.0909 19.0004 12.0506 19.0004 11C19.0004 9.94936 18.7935 8.90905 18.3914 7.93842C17.9894 6.96779 17.4001 6.08585 16.6572 5.34296C15.9143 4.60007 15.0324 4.01078 14.0618 3.60874C13.0911 3.20669 12.0508 2.99976 11.0002 2.99976C9.9496 2.99976 8.90929 3.20669 7.93866 3.60874C6.96803 4.01078 6.08609 4.60007 5.34321 5.34296C3.84288 6.84329 3 8.87818 3 11C3 13.1217 3.84288 15.1566 5.34321 16.657C6.84354 18.1573 8.87842 19.0002 11.0002 19.0002C13.122 19.0002 15.1569 18.1573 16.6572 16.657Z"
                             stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                 </button>
-
             </div>
         </div>
     </section>
 
 
     <script>
+        const inputText = document.getElementById("input_text");
+        const searchBtn = document.querySelector(".search_icon");
+
+        searchBtn.disabled = true;
+        //disabled : 따로 만든 변수X HTMl요소의 속성 ( button / input )
+        searchBtn.style.opacity = 0.3;
+
+        inputText.addEventListener("input", () => {
+            //"input" : 글자를 입력하거나 지우거나 복사하거나 붙여넣기 하거나 자동완성하거나 input에 들어온 이벤트를 받아오는 것
+
+            if (inputText.value.trim() !== "") {
+                // " " : 눈에 보이진 않지만 공백이 존재함 ( 값은 들어있음 )
+                // trim : 입력한 문자의 공백을 제거 -> "    강  남  " (강남)
+                searchBtn.disabled = false; // input에 어떤 값이 들어왔다면 disabled(비활성화)속성을 false로 바꾸어 꺼줌
+                searchBtn.style.opacity = 1;
+            } else {
+                // 만약 input에 들어온 value가 빈 값이라면 그대로 비활성화 유지 
+                searchBtn.disabled = true;
+                searchBtn.style.opacity = 0.3;
+            }
+        });
+
+
+        searchBtn.addEventListener("click", () => {
+            if (inputText.value.trim() !== "") {
+                input();
+            }
+        });
+
+        window.addEventListener("keyup", (e) => {
+            if (e.key === "Enter" && document.activeElement === inputText && inputText.value.trim() !== "") {
+                input();
+            }
+        });
+
+        function input() {
+            const query = encodeURIComponent("텍사스로드하우스 " + inputText.value.trim());
+            //encodeURIComponent : 
+
+            window.open("https://www.google.co.kr/maps/search/" + query + "/data=!3m1!4b1");
+        }
+
 
     </script>
 </body>
